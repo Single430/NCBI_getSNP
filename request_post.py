@@ -119,7 +119,7 @@ class RequestPost(object):
                         pass
 
                 print '\n===========%d Page: %d===========' % (page, page*200)
-                page_f = codecs.open('page.txt', 'wb', 'utf-8')
+                page_f = codecs.open('page.txt', 'wb', 'utf-8')  # 其中的page.txt是保存了当前页数的文件，初始内容应该写为0
                 page_f.write(str(page))
                 print '=============Write Success============='
 
