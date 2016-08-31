@@ -16,7 +16,7 @@ class CookieGet(object):
         """
         global cookieData, cookieList
         print '======================== Get Cookie==========================='
-        url = 'http://www.ncbi.nlm.nih.gov/snp/?term=homo+sapiens'
+        url = 'http://www.ncbi.nlm.nih.gov/x/?xxx'
         browser = webdriver.Firefox()
         browser.set_window_size(800, 600)
         try:
