@@ -11,11 +11,11 @@ from mysql_tables import MySqlTables
 
 
 class SnpItem(scrapy.Item):
-    snpid = scrapy.Field()
-    snpurl = scrapy.Field()
-    chrom = scrapy.Field()
-    gene = scrapy.Field()
-    func = scrapy.Field()
+    xx = scrapy.Field()
+    xpurl = scrapy.Field()
+    xxxx = scrapy.Field()
+    xx = scrapy.Field()
+    xx = scrapy.Field()
     pass
 
 
@@ -32,7 +32,7 @@ class RequestPost(object):
         print 'loading...'
         global retrun_data, status, isok, genef, snid
         try:
-            retrun_data = requests.post('http://www.ncbi.nlm.nih.gov/snp/?term=homo+sapiens',
+            retrun_data = requests.post('http://www.ncbi.nlm.nih.gov/x/?term=xxx',
                                         data=post_data, headers=headers, timeout=20)
 
             print 'See status'
