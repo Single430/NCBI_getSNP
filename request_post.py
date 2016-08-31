@@ -41,82 +41,8 @@ class RequestPost(object):
             if status == 200:
                 sel = Selector(text=retrun_data.text)
 
-                for i in range(1, 201):
-                    print '=======%d============='%(i)
-                    sn = sel.xpath('//div[%d][@class="rprt"]/div[@class="rslt"]/div[@class="supp"]/span//text()' % i).extract()
-                    try:
-                        snid = sn[0]
-
-                        try:
-                            snid,snid1 = ''.join(snid).split(' ',1)
-                            snid = ''.join(snid)
-                            self.item['snpid'] = snid
-                        except:
-                            self.item['snpid'] = snid
-
-                        self.item['snpurl'] = 'http://www.ncbi.nlm.nih.gov' + ''.join(sel.xpath('//div[%d][@class="rprt"]/div[@class="rslt"]/div[@class="supp"]/span/a/@href' % i).extract())
-                        sc = sel.xpath('//div[%d][@class="rprt"]/div[@class="rslt"]/div[@class="supp"]/dl' % i)
-
-                        scc = sc.xpath('./dt[1]/text()').extract()
-                        scc = ''.join(scc)
-                        scc = scc.strip()
-                        if scc == 'Chromosome:':
-                            self.item['chrom'] = ''.join(sc.xpath('./dd[1]/text()').extract())
-                        elif scc == 'Gene:':
-                            genef = sc.xpath('./dd[1]/a/@href').extract()
-                        elif scc == 'Functional Consequence:':
-                            self.item['func'] = ''.join(sc.xpath('./dd[1]/text()').extract())
-                        else:
-                            self.item['chrom'] = 'NULL'
-
-                        scc = sc.xpath('./dt[2]/text()').extract()
-                        scc = ''.join(scc)
-                        scc = scc.strip()
-                        if scc == 'Gene:':
-                            genef = sc.xpath('./dd[2]/a/@href').extract()
-                        elif scc == 'Functional Consequence:':
-                            self.item['func'] = ''.join(sc.xpath('./dd[2]/text()').extract())
-                        else:
-                            genef = 'NULL'
-
-                        scc = sc.xpath('./dt[3]/text()').extract()
-                        scc = ''.join(scc)
-                        scc = scc.strip()
-                        if scc == 'Functional Consequence:':
-                            self.item['func'] = ''.join(sc.xpath('./dd[3]/text()').extract())
-                        else:
-                            self.item['func'] = 'NULL'
-
-                        print 'download -> GeneID_table'
-                        if genef != 'NULL':
-                            for gen in genef:
-                                gen0,gen1 = ''.join(gen).split('=', 1)
-                                self.item['gene'] = int(gen1)
-                                # GeneID_item(item)
-                                mysql_Table.mysql_Item(self.item, 'ge')
-                                print self.item['snpid'], ':', self.item['gene']
-                        else:
-                            self.item['gene'] = 0
-                            # GeneID_item(item)
-                            mysql_Table.mysql_Item(self.item, 'ge')
-                            print self.item['snpid'], ':', self.item['gene']
-
-                        print 'download -> Chromosome_table'
-                        print self.item['snpid'], ':', self.item['chrom']
-                        # Chromosome_item(item)
-                        mysql_Table.mysql_Item(self.item, 'ch')
-
-                        print 'download -> Func_table'
-                        print self.item['snpid'], ':', self.item['func'].strip()
-                        func = self.item['func']
-                        func = ''.join(func).split(',')
-                        for fun in func:
-                            self.item['func'] = fun.strip()
-                            # Func_item(item)
-                            mysql_Table.mysql_Item(self.item, 'fc')
-                    except:
-                        print '????????????' # 这里的错误判断不全面，还在测试当中
-                        pass
+                # 主要部分不贴出了
+                # 这里记得要入数据库或者保存本地
 
                 print '\n===========%d Page: %d===========' % (page, page*200)
                 page_f = codecs.open('page.txt', 'wb', 'utf-8')  # 其中的page.txt是保存了当前页数的文件，初始内容应该写为0
